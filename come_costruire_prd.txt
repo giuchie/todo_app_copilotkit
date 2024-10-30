@@ -1,0 +1,24 @@
+https://www.youtube.com/watch?v=2PjmPU07KNs&ab_channel=AIJason
+
+crea instruction base
+
+con o1 possibibilmente:
+
+TUTTE LE INSTRUCTIONS
+-----
+---
+Above is the project i want to build.
+How should i structure my project files? 
+(try to create as few files as possible)
+Think step by step.
+
+
+dopo:
+
+Help me adding details to the original PRD that give clear alignment to developers who will implement the project;
+
+- don't create actual code, just the PRD
+- including file structure into the doc
+- including all documentations provided (with both example code & responses, those are important context)
+
+converti in markdown con cloude e sostituisci all'instruction base
