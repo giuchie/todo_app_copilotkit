@@ -22,3 +22,13 @@ Help me adding details to the original PRD that give clear alignment to develope
 - including all documentations provided (with both example code & responses, those are important context)
 
 converti in markdown con cloude e sostituisci all'instruction base
+
+
+----------
+PER LA UI
+-------
+approccio top down:
+
+I'm building a todo list app. Above is the HOME PAGE displaying the todo list.
+Please keep the functionalities exactly as they are, but make the UI looks a ton better;
+(Remember to keep the same functionalities or variables names, ONLY improve the UI)

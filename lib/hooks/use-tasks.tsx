@@ -41,6 +41,21 @@ export function TaskProvider({ children }: { children: ReactNode }) {
     value: JSON.stringify(tasks),
   })
 
+  
+
+  const addTask = (title: string, description: string) => {
+    if (!title.trim()) return
+
+    const newTask: Task = {
+      id: crypto.randomUUID(),
+      title,
+      description,
+      status: TaskStatus.TODO,
+    }
+
+    setTasks((prev) => [...prev, newTask])
+  }
+
   useCopilotAction({
     name: "addTask",
     description: "Adds a new task to the todo list",
@@ -63,20 +78,7 @@ export function TaskProvider({ children }: { children: ReactNode }) {
     }
   })
 
-  const addTask = (title: string, description: string) => {
-    if (!title.trim()) return
-
-    const newTask: Task = {
-      id: crypto.randomUUID(),
-      title,
-      description,
-      status: TaskStatus.TODO,
-    }
-
-    setTasks((prev) => [...prev, newTask])
-  }
-
-  const editTask = (id: string, title: string, description: string) => {
+  const editTask = (id: string, title: string , description: string) => {
     setTasks((prev) =>
       prev.map((task) =>
         task.id === id ? { ...task, title, description } : task
@@ -84,9 +86,53 @@ export function TaskProvider({ children }: { children: ReactNode }) {
     )
   }
 
+  useCopilotAction({
+    name: "editTask",
+    description: "Edits a task in the todo list",
+    parameters: [
+        {
+            name: "id",
+            type: "string",
+            description: "The id of the task to edit",
+            required: true,
+        },
+        {
+            name: "title",
+            type: "string",
+            description: "The new title of the task. If not provided, return previous title.",
+            required: true,
+        },
+        {
+            name: "description",
+            type: "string",
+            description: "The new description of the task. If not provided, return previous description.",
+            required: true,
+        }
+    ],
+    handler: ({id, title, description}) => {
+        editTask(id, title, description)
+    }
+})
+
   const deleteTask = (id: string) => {
     setTasks((prev) => prev.filter((task) => task.id !== id))
   }
+
+  useCopilotAction({
+    name: "deleteTask",
+    description: "Deletes a task from the todo list",
+    parameters: [
+        {
+            name: "id",
+            type: "string",
+            description: "The id of the task to delete",
+            required: true,
+        }
+    ],
+    handler: ({id}) => {
+        deleteTask(id)
+    }
+  })
 
   const toggleTaskStatus = (id: string) => {
     setTasks((prev) =>
@@ -103,6 +149,22 @@ export function TaskProvider({ children }: { children: ReactNode }) {
       )
     )
   }
+
+  useCopilotAction({
+    name: "toggleTaskStatus",
+    description: "Toggles the status of a task",
+    parameters: [
+        {
+            name: "id",
+            type: "string",
+            description: "The id of the task to toggle",
+            required: true,
+        }
+    ],
+    handler: ({id}) => {
+        toggleTaskStatus(id)
+    }
+  })
 
   return (
     <TaskContext.Provider
