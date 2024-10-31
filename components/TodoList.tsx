@@ -31,7 +31,7 @@ export function TodoList() {
     }
   }
 
-  const activeTasks = tasks.filter(task => task.status === TaskStatus.COMPLETED)
+  const activeTasks = tasks.filter(task => task.status === TaskStatus.TODO)
   const completedTasks = tasks.filter(task => task.status === TaskStatus.COMPLETED)
 
   return (

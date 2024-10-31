@@ -7,7 +7,7 @@ import {
   import { NextRequest } from 'next/server';
    
   const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
-  const serviceAdapter = new OpenAIAdapter({ openai });
+  const serviceAdapter = new OpenAIAdapter({ model: "gpt-4o", openai });
   const runtime = new CopilotRuntime();
    
   export const POST = async (req: NextRequest) => {
