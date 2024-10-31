@@ -2,7 +2,7 @@
 
 import React from 'react'
 import Square from './Square'
-import { useState } from 'react'
+//import { useState } from 'react'
 import { player, PlayerType } from '@/lib/tictactoe.types'
 import { useCopilotAction, useCopilotReadable } from '@copilotkit/react-core'
 
@@ -28,9 +28,15 @@ function calculateWinner(squares: player[]) {
     return null;
   }
 
-const Board = () => {
-    const [squares, setSquares] = useState<player[]>(Array(9).fill(null))
-    const [isNext, setIsNext] = useState<boolean>(true)
+  type BoardProps = {   
+    isNext: boolean,
+    squares: player[],
+    onPlay: (nextSquares: player[]) => void
+  }
+
+const Board = ({isNext, squares, onPlay}: BoardProps) => {
+    //const [squares, setSquares] = useState<player[]>(Array(9).fill(null))
+    //const [isNext, setIsNext] = useState<boolean>(true)
     //const [winner, setWinner] = useState<player | null>(null)
     const winner = calculateWinner(squares)
 
@@ -46,8 +52,7 @@ const Board = () => {
 
         const nextSquares = [...squares]
         nextSquares[index] = isNext ? PlayerType.User : PlayerType.Ai
-        setSquares(nextSquares)
-        setIsNext(!isNext)
+        onPlay(nextSquares)
     }
 
     useCopilotAction({
